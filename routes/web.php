@@ -11,6 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+  return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('admin')->group(function() {
+  Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+  Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+  Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+  Route::post('/dashboard', 'AdminController@submitQuiz')->name('admin.dashboard.submit');
+});
+
+Route::prefix('user')->group(function() {
+  Route::get('/exam', 'ExamController@index')->name('user.dashboard');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
