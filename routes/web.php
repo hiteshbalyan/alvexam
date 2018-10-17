@@ -28,9 +28,11 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::prefix('user')->group(function() {
-  Route::get('/exam', 'ExamController@index')->name('user.dashboard');
+  Route::get('exam', 'ExamController@index')->name('user.dashboard');
+  Route::get('paper', 'ExamController@getPaper')->name('api.getPaper');
+  Route::get('stats', 'ExamController@getStats')->name('api.getStats');
+  Route::get('question', 'ExamController@getQuestion')->name('api.getQuestion');
+  Route::post('question/{question}', 'ExamController@submitQuestion')->name('api.submitQuestion');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
